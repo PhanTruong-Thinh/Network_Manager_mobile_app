@@ -21,10 +21,10 @@ const App = () => {
             let rn = route.name;
             if (rn == 'Home') {
               iconName = 'cellphone-nfc';
+            } else if (rn == 'Signal') {
+              iconName = 'signal-cellular-outline';
             } else if (rn == 'Account') {
               iconName = 'account-circle-outline';
-            } else if (rn == 'Signal') {
-              iconName = 'devices';
             }
             return (
               <MaterialCommunityIcons
@@ -46,8 +46,8 @@ const App = () => {
           },
         })}>
         <Tab.Screen name={'Home'} component={HomeScreen} />
-        <Tab.Screen name={'Account'} component={Account} />
         <Tab.Screen name={'Signal'} component={Signal} />
+        <Tab.Screen name={'Account'} component={Account} />
       </Tab.Navigator>
     </NavigationContainer>
   );
