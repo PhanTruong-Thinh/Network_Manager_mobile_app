@@ -47,10 +47,7 @@ const App = () => {
           tabBarInactiveTintColor: 'white', // Màu sắc của biểu tượng khi tab không được chọn
           tabBarStyle: {
             backgroundColor: '#003B64', // Màu sắc nền của thanh tab
-          },
-          tabBarLabelStyle: {
-            fontSize: 12, // Cỡ chữ của nhãn tab
-          },
+          }
         })}>
         <Tab.Screen name={'Home'} component={HomeScreen} />
         <Tab.Screen name={'Signal'} component={Signal} />
