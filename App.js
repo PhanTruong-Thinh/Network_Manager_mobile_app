@@ -1,5 +1,5 @@
-import * as React from 'react';
-import {StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 // import {Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -11,12 +11,17 @@ import Signal from './Nav/Signal';
 const Tab = createBottomTabNavigator();
 
 const App = () => {
+  const [itemsNav, setItemNav] = useState(null);
+  const onPressNav = buttonName => {
+    setItemNav(buttonName);
+  };
+
   return (
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName={'Home'}
         screenOptions={({route}) => ({
-          tabBarIcon: ({focused, color, size}) => {
+          tabBarIcon: ({ color, size}) => {
             let iconName;
             let rn = route.name;
             if (rn == 'Home') {
@@ -27,11 +32,13 @@ const App = () => {
               iconName = 'account-circle-outline';
             }
             return (
-              <MaterialCommunityIcons
-                name={iconName}
-                size={size}
-                color={color}
-              />
+              <TouchableOpacity>
+                <MaterialCommunityIcons
+                  name={iconName}
+                  size={size}
+                  color={color}
+                />
+              </TouchableOpacity>
             );
           },
 
