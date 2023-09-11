@@ -5,9 +5,10 @@ import {
   Text,
   Button,
   View,
-  StyleSheet,Image, requireNativeComponent,PermissionsAndroid
+  StyleSheet,Image
 } from 'react-native';
-import { getVersion } from 'jest';
+import {calculateNetworkRange} from 'K:/Document/Lab/Network Project/Network_Manager_mobile_app/API/NetWorkInterface.js';
+
 // import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const Home = ({navigation}) => {
@@ -17,13 +18,15 @@ const Home = ({navigation}) => {
   const [subnetMask, setSubnetMask] = useState("");
   const [defaultGateway, setDefaultGateway] = useState("");
   const [SSID, setSSID] = useState("....");
+  const [networkRange,setNetworkRange] = useState("");
 
   useEffect(() => {
-    NetworkInfo.getIPV4Address().then(ip => {setIpAddress(ip)})
+    NetworkInfo.getIPAddress().then(ipadd => {setIpAddress(ipadd)})
     NetworkInfo.getIPV4Address().then(IPAddress => {setIp(IPAddress)});
     NetworkInfo.getGatewayIPAddress().then(getGatewayIPAddress => {setDefaultGateway(getGatewayIPAddress)});
     NetworkInfo.getSubnet().then(subnetMask => {setSubnetMask(subnetMask)});
     NetworkInfo.getSSID().then(ssid => {setSSID(ssid)});
+    setNetworkRange(calculateNetworkRange(ip, subnetMask));
   }, []);
 
   return (
@@ -69,9 +72,9 @@ const Home = ({navigation}) => {
             </View>
             <View style={{height:'100%', width:'65%'}}>
               <Text>{SSID}</Text>
-              <Text>FPT</Text>
+              <Text>VNPT</Text>
               <Text>{subnetMask}</Text>
-              <Text>192.168.1.1 - 192.168.1.254</Text>
+              <Text>{networkRange}</Text>
               <Text>{defaultGateway}</Text>
               <Text>fffffffffff</Text>
              

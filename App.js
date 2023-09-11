@@ -6,6 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import HomeScreen from './Nav/Home';
 import Account from './Nav/Account';
 import Signal from './Nav/Signal';
+import Toolss from './Nav/Tools';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,6 +21,8 @@ const App = () => {
             const rn = route.name;
             if (rn === 'Home') {
               iconName = 'cellphone-nfc';
+            } else if(rn === 'Tools'){
+              iconName = 'account-circle-outline';
             } else if (rn === 'Signal') {
               iconName = 'signal-cellular-outline';
             } else if (rn === 'Account') {
@@ -42,6 +45,7 @@ const App = () => {
           },
         })}>
         <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name='Tools' component={Toolss}/>
         <Tab.Screen name="Signal" component={Signal} />
         <Tab.Screen name="Account" component={Account} />
       </Tab.Navigator>
