@@ -1,6 +1,7 @@
 import * as React from 'react';
 import  { useEffect, useState } from 'react';
-import {NetworkInfo, DeviceInfo} from "react-native-network-info";
+import {NetworkInfo} from "react-native-network-info";
+
 import {
   Text,
   Button,
@@ -13,15 +14,20 @@ import {calculateNetworkRange} from 'K:/Document/Lab/Network Project/Network_Man
 
 const Home = ({navigation}) => {
 
-  const [ipAddress, setIpAddress] = useState('Đang lấy địa chỉ IP...');
-  const [ip, setIp] = useState("....");
+  const [ipAddress, setIpAddress] = useState('');
+  const [ip, setIp] = useState("");
   const [subnetMask, setSubnetMask] = useState("");
   const [defaultGateway, setDefaultGateway] = useState("");
-  const [SSID, setSSID] = useState("....");
+  const [SSID, setSSID] = useState("");
   const [networkRange,setNetworkRange] = useState("");
 
   useEffect(() => {
-    NetworkInfo.getIPAddress().then(ipadd => {setIpAddress(ipadd)})
+    fetch("https://ipinfo.io/json").then(
+      (response) => response.json()
+    ).then(
+      (jsonResponse) => setIpAddress(jsonResponse.ip)
+    )
+    // NetworkInfo.getIPAddress().then(ipadd => {setIpAddress(ipadd)})
     NetworkInfo.getIPV4Address().then(IPAddress => {setIp(IPAddress)});
     NetworkInfo.getGatewayIPAddress().then(getGatewayIPAddress => {setDefaultGateway(getGatewayIPAddress)});
     NetworkInfo.getSubnet().then(subnetMask => {setSubnetMask(subnetMask)});
@@ -72,7 +78,7 @@ const Home = ({navigation}) => {
             </View>
             <View style={{height:'100%', width:'65%'}}>
               <Text>{SSID}</Text>
-              <Text>VNPT</Text>
+              <Text>;;;</Text>
               <Text>{subnetMask}</Text>
               <Text>{networkRange}</Text>
               <Text>{defaultGateway}</Text>
